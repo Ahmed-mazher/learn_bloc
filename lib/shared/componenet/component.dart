@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter/modules/users_screen.dart';
+import 'package:udemy_flutter/shared/cubit/cubit.dart';
 
 Widget defaultFormField({
   required TextEditingController controller,
@@ -26,12 +26,19 @@ Widget defaultFormField({
     obscureText: secureText ?? false,
     decoration: InputDecoration(
       labelText: label,
-      prefixIcon: prefixIcon != null ? Icon(prefixIcon,) : null,
-      suffixIcon: suffixIcon != null ? IconButton(
-          icon: Icon(
-            suffixIcon,
-          ), onPressed: onSuffixPressed,
-      ) : null,
+      prefixIcon: prefixIcon != null
+          ? Icon(
+              prefixIcon,
+            )
+          : null,
+      suffixIcon: suffixIcon != null
+          ? IconButton(
+              icon: Icon(
+                suffixIcon,
+              ),
+              onPressed: onSuffixPressed,
+            )
+          : null,
       border: const OutlineInputBorder(),
     ),
     validator: (value) {
@@ -43,65 +50,65 @@ Widget defaultFormField({
   );
 }
 
-
 Widget buildUserItem(UserModel users) => Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 25,
-              child: Text(
-                '${users.id}',
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 25,
+            child: Text(
+              '${users.id}',
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                users.name,
                 style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  users.name,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Text(
+                users.phone,
+                style: const TextStyle(
+                  color: Colors.grey,
                 ),
-                Text(
-                  users.phone,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
 
-      Widget buildTaksItem(Map tasks) => Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 25,
-              child: Text(
-                '${tasks['id']}',
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+Widget buildTaksItem(Map tasks, context) => Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 25,
+            child: Text(
+              '${tasks['id']}',
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              width: 20,
-            ),
-            Column(
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -120,6 +127,23 @@ Widget buildUserItem(UserModel users) => Padding(
                 ),
               ],
             ),
-          ],
-        ),
-      );
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          IconButton(
+              onPressed: () {
+                AppCubit.get(context).updateData(status: 'done', id: tasks['id']);
+              },
+              icon: const Icon(
+                Icons.check_box,
+                color: Colors.greenAccent,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.archive,
+              ))
+        ],
+      ),
+    );

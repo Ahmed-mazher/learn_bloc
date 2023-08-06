@@ -13,20 +13,11 @@ class HomeLayout extends StatelessWidget {
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
-
   bool isBottomSheetOpened = false;
-
   var titleController = TextEditingController();
   var dateController = TextEditingController();
   var timeController = TextEditingController();
-
   HomeLayout({super.key});
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   createDatabase();
-  // }
 
   @override
   Widget build(BuildContext context) {

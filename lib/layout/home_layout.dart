@@ -5,6 +5,7 @@ import 'package:udemy_flutter/shared/componenet/component.dart';
 import 'package:udemy_flutter/shared/cubit/cubit.dart';
 
 import 'package:sqflite/sqflite.dart';
+import 'package:udemy_flutter/shared/cubit/states.dart';
 
 // ignore: must_be_immutable
 class HomeLayout extends StatelessWidget {
@@ -31,16 +32,16 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => AppCubit(),
-      child: BlocConsumer(
-        listener: (BuildContext context, Object? state) {},
-        builder: (BuildContext context, state) {
+      child: BlocConsumer<AppCubit, AppSates>(
+        listener: (BuildContext listenerContext, state) {},
+        builder: (BuildContext builderContext, state) {
           return Scaffold(
             key: scaffoldKey,
             appBar: AppBar(
                 title: Text(
-              AppCubit.get(context).titles[AppCubit.get(context).currentIndex],
+              AppCubit.get(builderContext).titles[AppCubit.get(builderContext).currentIndex],
             )),
-            body: AppCubit.get(context).screens[AppCubit.get(context).currentIndex],
+            body: AppCubit.get(builderContext).screens[AppCubit.get(builderContext).currentIndex],
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 if (isBottomSheetOpened) {
@@ -139,9 +140,9 @@ class HomeLayout extends StatelessWidget {
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
-              currentIndex: AppCubit.get(context).currentIndex,
+              currentIndex: AppCubit.get(builderContext).currentIndex,
               onTap: (index) {
-                AppCubit.get(context).changeIndex(index);
+                AppCubit.get(builderContext).changeIndex(index);
               },
               items: const [
                 BottomNavigationBarItem(

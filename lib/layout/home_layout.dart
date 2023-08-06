@@ -22,12 +22,6 @@ class HomeLayout extends StatelessWidget {
 
   HomeLayout({super.key});
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   createDatabase();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

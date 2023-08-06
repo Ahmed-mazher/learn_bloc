@@ -19,7 +19,6 @@ class HomeLayout extends StatelessWidget {
   var titleController = TextEditingController();
   var dateController = TextEditingController();
   var timeController = TextEditingController();
-
   HomeLayout({super.key});
 
   @override

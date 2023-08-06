@@ -15,7 +15,6 @@ class HomeLayout extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
 
   bool isBottomSheetOpened = false;
-
   var titleController = TextEditingController();
   var dateController = TextEditingController();
   var timeController = TextEditingController();
